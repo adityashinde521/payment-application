@@ -1,0 +1,53 @@
+version: '3.4'
+
+services:
+  webapp:
+    build:
+      context: ./WebAPP
+      dockerfile: Dockerfile
+    ports:
+      - "8080:80"  # Exposes the WebApp on port 8080
+    depends_on:
+      - webapi  # Make sure WebAPI is up before WebApp starts
+    networks:
+      - docker-app-network
+    environment:
+      - API_URL=http://webapi:5000  # WebApp connects to WebAPI through this URL
+
+  webapi:
+    image: ${DOCKER_REGISTRY-}webapi
+    build:
+      context: .
+      dockerfile: WebAPI/Dockerfile
+    ports:
+      - "5000:80"
+    #environment:
+    # - DB_CONNECTION_STRING=Server=host.docker.internal\\sqlexpress;Database=PaymentDetailDB;Trusted_Connection=True;Encrypt=false;MultipleActiveResultSets=True;
+    environment:
+      - DB_CONNECTION_STRING=Server=sqlserver;Database=PaymentDetailDB;User Id=sa;Password=Qwerty!123;Encrypt=false;MultipleActiveResultSets=True;
+    depends_on:
+      - sqlserver  # Ensure SQL Server is started before WebAPI
+    networks:
+      - docker-app-network
+    entrypoint: ["dotnet", "WebAPI.dll"]  # Runs the WebAPI app
+
+  sqlserver:
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    container_name: payment-db
+    environment:
+      - ACCEPT_EULA=Y
+      - SA_PASSWORD=Qwerty!123  # Use a strong password for the 'sa' user
+      - MSSQL_PID=Express  # Optionally specify edition
+    ports:
+      - "1433:1433"  # Expose SQL Server port
+    healthcheck:
+      test: ["CMD", "sqlcmd", "-U", "sa", "-P", "Qwerty!123", "-Q", "SELECT 1"]
+      interval: 30s
+      retries: 3
+      start_period: 30s  # Wait 30 seconds before starting health checks
+    networks:
+      - docker-app-network
+
+networks:
+  docker-app-network:
+    driver: bridge
