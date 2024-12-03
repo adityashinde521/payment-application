@@ -6,9 +6,9 @@ Below is the updated and detailed `README.md` file based on the provided Dockerf
 
 This repository provides a step-by-step guide to set up and run a containerized application consisting of:
 
-- **Frontend**: Angular  
+- **Frontend**: Angular [v7]
 - **Backend**: .NET Core 6 API  
-- **Database**: SQL Server  
+- **Database**: SQL Server  [2022]
 
 The application uses Docker and Docker Compose to streamline deployment.
 
@@ -23,17 +23,24 @@ Ensure the following tools are installed:
 - **Node.js**: Version 18.x or later ([Download Node.js](https://nodejs.org/)) for Angular application (if local modifications are required).  
 - **.NET SDK**: Version 6.x ([Download .NET SDK](https://dotnet.microsoft.com/download)) for .NET Core API (if local modifications are required).  
 
+##  Required Versions
+Tool	    Required Version
+Docker	  20.10+
+Node.js	  18.x
+NPM	      8.x
+.NET SDK	6.0.x
+
+---
+
 ### 2. Verify Installed Versions
 Run the following commands to confirm the installed versions:
 
 ```bash
-docker --version   # Docker version
+docker --version   # Docker version     
 node --version     # Node.js version
 npm --version      # NPM version
 dotnet --version   # .NET SDK version
 ```
-
----
 
 ## Repository Structure
 
