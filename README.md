@@ -1,6 +1,3 @@
-Below is the updated and detailed `README.md` file based on the provided Dockerfiles and `docker-compose.yml`:
-
----
 
 # Containerized Sample Payment Application (BASIC CRUD) Setup
 
