@@ -24,11 +24,11 @@ Ensure the following tools are installed:
 - **.NET SDK**: Version 6.x ([Download .NET SDK](https://dotnet.microsoft.com/download)) for .NET Core API (if local modifications are required).  
 
 ##  Required Versions
-Tool	    Required Version
-Docker	  20.10+
-Node.js	  18.x
-NPM	      8.x
-.NET SDK	6.0.x
+-  Tool	      Required Version
+-  Docker	    20.10+
+-  Node.js	  18.x
+-  NPM	      8.x
+-  .NET SDK	  6.0.x
 
 ---
 
